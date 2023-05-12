@@ -16,19 +16,31 @@ function solve() {
         }
 
         const matrixRowsAmount = matrixTable.length;
+        const matrixColsAmount = matrixTable[0].length;
 
-        for (let i = 0; i < matrixRowsAmount; i++) {
-            let currRow = matrixTable[i]
-            let currCol = matrixTable.map(row => row[i]);
+        for (let row = 0; row < matrixRowsAmount; row++) {
+            const [firstNum, secondNum, thirdNum] = matrixTable[row];
 
-            let uniqueNumbersInRow = [... new Set(currRow)].length;
-            let uniqueNumbersInCol = [... new Set(currCol)].length;
-
-            if (currRow.length !== uniqueNumbersInRow || currCol.length !== uniqueNumbersInCol) {
+            if (!(firstNum !== secondNum && firstNum !== thirdNum && secondNum !== thirdNum)) {
                 isSolved = false;
                 break;
             }
-         }
+
+            for (let col = 0; col < matrixColsAmount; col++) {
+                const currColFirstNum = matrixTable[0][col];
+                const currColSecondNum = matrixTable[1][col];
+                const currColThirdNum = matrixTable[2][col];
+
+                if (!(currColFirstNum !== currColSecondNum && currColFirstNum !== currColThirdNum && currColSecondNum !== currColThirdNum)) {
+                    isSolved = false;
+                    break;
+                }
+            }
+
+            if (!isSolved) {
+                break;
+            }
+        }
 
         if (isSolved) {
             table.style.border = '2px solid green';
@@ -50,7 +62,6 @@ function solve() {
         });
 
         table.style.border = 'none';
-        textParagraphElement.style.color = 'none';
         textParagraphElement.textContent = '';
     }
 }
