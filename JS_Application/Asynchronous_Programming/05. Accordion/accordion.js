@@ -1,5 +1,3 @@
-window.onload = solution();
-
 function solution() {
     const sectionElement = document.getElementById('main');
     const baseUrl = 'http://localhost:3030/jsonstore/advanced/articles';
@@ -69,3 +67,5 @@ function solution() {
         }
     }
 }
+
+solution();
