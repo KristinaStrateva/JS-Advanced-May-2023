@@ -5,14 +5,14 @@ function attachEvents() {
     const h1PostTitleElement = document.getElementById('post-title');
     const postParagraphElement = document.getElementById('post-body');
     const commentsUlElement = document.getElementById('post-comments');
-    const postsUrl = 'http://localhost:3030/jsonstore/blog/posts';
-    const commentsUrl = 'http://localhost:3030/jsonstore/blog/comments'
+    // const postsUrl = 'http://localhost:3030/jsonstore/blog/posts';
+    // const commentsUrl = 'http://localhost:3030/jsonstore/blog/comments'
 
     loadButtonElement.addEventListener('click', onLoad);
     viewButtonElement.addEventListener('click', onView);
 
     function onLoad() {
-        fetch(postsUrl)
+        fetch('http://localhost:3030/jsonstore/blog/posts')
             .then(res => res.json())
             .then(data => {
                 const postsArr = Object.values(data);
@@ -29,12 +29,14 @@ function attachEvents() {
                 });
             })
             // .catch(err => console.log('posts Error'));
+
+            selectElement.innerHTML = '';
     }
 
     function onView() {
         const currPostId = selectElement.value;
 
-        fetch(postsUrl)
+        fetch('http://localhost:3030/jsonstore/blog/posts')
             .then(res => res.json())
             .then(data => {
                 const currPost = Object.values(data).find(post => post.id === currPostId);
@@ -43,7 +45,7 @@ function attachEvents() {
                 postParagraphElement.textContent = currPost.body;
             });
 
-        fetch(`${commentsUrl}`)
+        fetch('http://localhost:3030/jsonstore/blog/comments')
             .then(res => res.json())
             .then(data => {
                 const commentsArr = Object.values(data);
