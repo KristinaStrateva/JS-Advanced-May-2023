@@ -32,9 +32,11 @@ function attachEvents() {
 
             selectElement.innerHTML = '';
     }
-
+    
     function onView() {
         const currPostId = selectElement.value;
+
+        commentsUlElement.innerHTML = '';
 
         fetch('http://localhost:3030/jsonstore/blog/posts')
             .then(res => res.json())
@@ -62,7 +64,6 @@ function attachEvents() {
             })
             // .catch(err => console.log('comments Error'));
 
-        commentsUlElement.innerHTML = '';
     }
 }
 
