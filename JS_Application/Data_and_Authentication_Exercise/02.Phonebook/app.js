@@ -14,7 +14,7 @@ attachEvents();
 // Load all phonebook entries -> Load button -> GET Request
 
 function onLoad() {
-    ulPhonebookElement.innerHTML = '';
+    Array.from(ulPhonebookElement.children).forEach(li => li.remove());
 
     fetch(baseUrl)
         .then(res => res.json())
