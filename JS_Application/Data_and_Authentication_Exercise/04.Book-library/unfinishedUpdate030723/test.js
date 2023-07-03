@@ -1,12 +1,10 @@
-const baseUrl = 'http://localhost:3030/jsonstore/collections/books';
+baseUrl = 'http://localhost:3030/jsonstore/collections/books';
 const loadButtonElement = document.getElementById('loadBooks');
 const tbodyElement = document.querySelector('tbody');
 const formElement = document.querySelector('form');
 const [titleInputElement, authorInputElement] = formElement.querySelectorAll('input');
 const h3Element = document.querySelector('h3');
 const submitButtonElement = document.querySelector('form > button');
-
-tbodyElement.querySelectorAll('tr').forEach(tr => tr.remove());
 
 loadButtonElement.addEventListener('click', onLoad);
 formElement.addEventListener('submit', onSubmit);
@@ -83,14 +81,6 @@ function onEdit(event) {
     h3Element.textContent = 'Edit FORM';
     const currId = event.target.dataset.id;
 
-    const currRow = event.target.parentElement.parentElement;
-
-    const currTitle = currRow.querySelectorAll('td')[0].textContent;
-    const currAuthor = currRow.querySelectorAll('td')[1].textContent;
-
-    titleInputElement.value = currTitle;
-    authorInputElement.value = currAuthor;
-
     submitButtonElement.remove();
 
     const saveButtonElement = document.createElement('button');
@@ -130,6 +120,4 @@ function onDelete(event) {
     const currId = event.target.dataset.id;
 
     fetch(`${baseUrl}/${currId}`, { method: 'delete' });
-
-    event.target.parentElement.parentElement.remove();
 }
