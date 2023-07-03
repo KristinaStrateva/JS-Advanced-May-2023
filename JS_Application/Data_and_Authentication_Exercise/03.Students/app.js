@@ -77,10 +77,7 @@ function createRow(firstName, lastName, facNum, grade) {
     const td4Element = document.createElement('td');
     td4Element.textContent = grade;
 
-    trElement.appendChild(td1Element);
-    trElement.appendChild(td2Element);
-    trElement.appendChild(td3Element);
-    trElement.appendChild(td4Element);
-
+    trElement.append(td1Element, td2Element, td3Element, td4Element);
+    
     tbodyElement.appendChild(trElement);
 }
