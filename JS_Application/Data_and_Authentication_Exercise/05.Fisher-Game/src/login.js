@@ -16,8 +16,8 @@ async function onSubmit(event) {
 
     const formData = new FormData(event.currentTarget);
 
-    const currEmail = formData.get('email');
-    const currPassword = formData.get('password');
+    const currEmail = formData.get('email').trim();
+    const currPassword = formData.get('password').trim();
 
     const bodyData = {
         email: currEmail,

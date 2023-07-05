@@ -14,7 +14,11 @@ async function onRegister(event) {
 
     const formData = new FormData(event.currentTarget);
 
-    const [email, password, rePass] = [...formData.values()];
+    // const [email, password, rePass] = [...formData.values()];
+
+    const email = formData.get('email').trim();
+    const password = formData.get('password').trim();
+    const rePass = formData.get('rePass').trim();
 
     const options = {
         method: 'post',
