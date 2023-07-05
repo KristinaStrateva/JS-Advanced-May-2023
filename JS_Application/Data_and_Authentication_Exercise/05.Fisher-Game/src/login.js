@@ -1,12 +1,12 @@
-document.querySelectorAll('a').forEach(aTag => aTag.classList.remove('active'));
-const loginButtonElement = document.querySelector('a#login');
-loginButtonElement.classList = 'active';
-
-const logoutDivElement = document.getElementById('user');
-logoutDivElement.style.display = 'none';
-
-const formElement = document.querySelector('form');
 window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a').forEach(aTag => aTag.classList.remove('active'));
+    const loginButtonElement = document.querySelector('a#login');
+    loginButtonElement.classList = 'active';
+    
+    const logoutDivElement = document.getElementById('user');
+    logoutDivElement.style.display = 'none';
+    
+    const formElement = document.querySelector('form');
 
     formElement.addEventListener('submit', onSubmit);
 });

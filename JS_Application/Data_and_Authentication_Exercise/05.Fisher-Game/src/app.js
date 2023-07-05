@@ -1,5 +1,4 @@
 let userData = null;
-const baseUrl = 'http://localhost:3030/data/catches';
 
 window.addEventListener('DOMContentLoaded', () => {
     const guestDivElement = document.getElementById('guest');
@@ -30,7 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 async function onLoad() {
     const catchesDivElement = document.getElementById('catches');
-    const res = await fetch(baseUrl);
+    const res = await fetch('http://localhost:3030/data/catches');
     const data = await res.json();
 
     Array.from(catchesDivElement.children).forEach(child => child.remove());
@@ -49,7 +48,7 @@ async function onAddSubmit(event) {
 
     const formData = new FormData(event.currentTarget);
 
-    // Create an object data that keeps the inputs as keys and input values as their values
+    // Create an object data that keeps the inputs as keys and input values as key values
     const bodyData = [...formData.entries()].reduce((acc, [key, value]) => Object.assign(acc, { [key]: value }), {});
 
     const options = {
@@ -66,7 +65,7 @@ async function onAddSubmit(event) {
             throw new Error('All fields must be non-empty!');
         }
 
-        const res = await fetch(baseUrl, options);
+        const res = await fetch('http://localhost:3030/data/catches', options);
 
         if (res.ok !== true) {
             const errMessage = (await res.json()).message;
@@ -127,7 +126,7 @@ async function onUpdate(event) {
             body: JSON.stringify(bodyData)
         };
 
-        await fetch(`${baseUrl}/${currCatchId}`, options);
+        await fetch(`http://localhost:3030/data/catches/${currCatchId}`, options);
 
         onLoad();
 
@@ -140,7 +139,7 @@ async function onDelete(event) {
     const currCatchId = event.target.dataset.id;
 
     try {
-        const res = await fetch(`${baseUrl}/${currCatchId}`, {
+        const res = await fetch(`http://localhost:3030/data/catches/${currCatchId}`, {
             method: 'delete',
             headers: {
                 'X-Authorization': userData.token
@@ -154,7 +153,9 @@ async function onDelete(event) {
     }
 }
 
-async function onLogout() {
+async function onLogout(event) {
+    event.preventDefault();
+    
     try {
         const response = await fetch('http://localhost:3030/users/logout', {
             method: 'get',
