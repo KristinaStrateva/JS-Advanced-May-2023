@@ -10,6 +10,5 @@ export async function postContent(event) {
 
     window.location = './theme-content.html';
 
-
     const titleNameElement = document.querySelector('.theme-name h2');
 }
