@@ -25,11 +25,11 @@ describe('E2E tests', async function () {
     it('should check the More button functionality', async () => {
         await page.goto('http://localhost:5500');
 
-        const moreButtonElement = await page.getByText('More').first().click();
+        await page.getByText('More').first().click();
         const extraDivElementContent = await page.locator('div.extra').first().allTextContents();
         const extraDivElementVisibility = await page.isVisible('div.extra');
 
         expect(extraDivElementVisibility).to.be.true;
-        expect(extraDivElementContent).to.be.equal()
+        expect(extraDivElementContent.length).to.be.greaterThan(0);
     });
 });
