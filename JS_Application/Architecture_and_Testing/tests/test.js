@@ -6,7 +6,7 @@ let browser, page;
 describe('E2E tests', async function () {
     this.timeout(15000);
 
-    before(async () => { browser = await chromium.launch(); });
+    before(async () => { browser = await chromium.launch({headless: false, slowMo: 1000}); });
     after(async () => { await browser.close(); });
     beforeEach(async () => { page = await browser.newPage(); });
     afterEach(async () => { await page.close(); });
@@ -31,5 +31,17 @@ describe('E2E tests', async function () {
 
         expect(extraDivElementVisibility).to.be.true;
         expect(extraDivElementContent.length).to.be.greaterThan(0);
+    });
+
+    it('should change the More button to Less button when the More button is clicked', async () => {
+        await page.goto('http://localhost:5500');
+
+        await page.getByText('More').first().click();
+        let extraDivElementVisibility = await page.isVisible('div.extra');
+        expect(extraDivElementVisibility).to.be.true;
+
+        await page.getByText('Less').first().click();
+        extraDivElementVisibility = await page.isVisible('div.extra');
+        expect(extraDivElementVisibility).to.be.false;
     });
 });
